@@ -96,5 +96,11 @@ public class DataContext : DbContext
 			.WithMany(b => b.Wheels)
 			.HasForeignKey(t => t.WheelCategory)
 			.HasPrincipalKey(b => b.Name);
+
+		// Cart
+		modelBuilder.Entity<CartItem>()
+			.HasOne(t => t.Carts)
+			.WithMany(b => b.CartItems)
+			.HasForeignKey(t => t.CartId);
 	}
 }
