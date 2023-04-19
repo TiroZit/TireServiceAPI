@@ -1,6 +1,6 @@
 ﻿namespace TireServiceAPI.Models.Product.Types.Tire
 {
-	public class TireSeason
+	public class TireCategory
 	{
 		public int Id { get; set; }
 		public string? Name { get; set; }

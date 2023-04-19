@@ -1,9 +1,9 @@
 ﻿namespace TireServiceAPI.Models.Product.Types.Wheel
 {
-    public class WheelType
-    {
+	public class WheelCategory
+	{
 		public int Id { get; set; }
-        public string Name { get; set; } = string.Empty;
+		public string? Name { get; set; }
 		public List<Wheel> Wheels { get; set; } = new();
 	}
 }

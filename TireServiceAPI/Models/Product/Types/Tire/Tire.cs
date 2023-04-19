@@ -1,27 +1,30 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
-
-namespace TireServiceAPI.Models.Product.Types.Tire
+﻿namespace TireServiceAPI.Models.Product.Types.Tire
 {
 	public class Tire
 	{
 		public int Id { get; set; }
 		
-		public string Name { get; set; }
+		public string? Name { get; set; }
 		public int Price { get; set; }
 		
-		public string Image { get; set; }
+		public string? Image { get; set; }
 		
-		public int BrandId { get; set; }
-		
-		public int WidthId { get; set; }
-		
-		public int DiameterId { get; set; }
-		
-		public int TireSeasonId { get; set; }
-				
-		public int TireProfileId { get; set; }
+		public string? Brand { get; set; }
+		public Brand? Brands { get; set; }
+
+		public string? Width { get; set; }
+		public Width? Widths { get; set; }
+
+		public string? Diameter { get; set; }
+		public Diameter? Diameters { get; set; }
+
+		public string? TireSeason { get; set; }
+		public TireSeason? TireSeasons { get; set; }
+
+		public string? TireProfile { get; set; }
+		public TireProfile? TireProfiles { get; set; }
+
+		public string? TireCategory { get; set; }
+		public TireCategory? TireCategories { get; set; }
 	}
 }

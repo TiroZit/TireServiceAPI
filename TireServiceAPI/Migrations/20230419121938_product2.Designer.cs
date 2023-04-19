@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace TireServiceAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230419080837_Product")]
-    partial class Product
+    [Migration("20230419121938_product2")]
+    partial class product2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,7 +33,7 @@ namespace TireServiceAPI.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
@@ -50,7 +50,7 @@ namespace TireServiceAPI.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
@@ -65,43 +65,41 @@ namespace TireServiceAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("BrandId")
-                        .HasColumnType("int");
+                    b.Property<string>("Brand")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("DiameterId")
-                        .HasColumnType("int");
+                    b.Property<string>("Diameter")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Image")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
-                    b.Property<int>("TireProfileId")
-                        .HasColumnType("int");
+                    b.Property<string>("TireProfile")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("TireSeasonId")
-                        .HasColumnType("int");
+                    b.Property<string>("TireSeason")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("WidthId")
-                        .HasColumnType("int");
+                    b.Property<string>("Width")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BrandId");
+                    b.HasIndex("Brand");
 
-                    b.HasIndex("DiameterId");
+                    b.HasIndex("Diameter");
 
-                    b.HasIndex("TireProfileId");
+                    b.HasIndex("TireProfile");
 
-                    b.HasIndex("TireSeasonId");
+                    b.HasIndex("TireSeason");
 
-                    b.HasIndex("WidthId");
+                    b.HasIndex("Width");
 
                     b.ToTable("Tires");
                 });
@@ -116,7 +114,7 @@ namespace TireServiceAPI.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
@@ -133,7 +131,7 @@ namespace TireServiceAPI.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
@@ -148,11 +146,11 @@ namespace TireServiceAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("BrandId")
-                        .HasColumnType("int");
+                    b.Property<string>("Brand")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("DiameterId")
-                        .HasColumnType("int");
+                    b.Property<string>("Diameter")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
@@ -163,23 +161,23 @@ namespace TireServiceAPI.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
-                    b.Property<int>("WheelTypeId")
-                        .HasColumnType("int");
+                    b.Property<string>("WheelType")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("WidthId")
-                        .HasColumnType("int");
+                    b.Property<string>("Width")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BrandId");
+                    b.HasIndex("Brand");
 
-                    b.HasIndex("DiameterId");
+                    b.HasIndex("Diameter");
 
-                    b.HasIndex("WheelTypeId");
+                    b.HasIndex("WheelType");
 
-                    b.HasIndex("WidthId");
+                    b.HasIndex("Width");
 
-                    b.ToTable("Wheel");
+                    b.ToTable("Wheels");
                 });
 
             modelBuilder.Entity("TireServiceAPI.Models.Product.Types.Wheel.WheelType", b =>
@@ -192,7 +190,7 @@ namespace TireServiceAPI.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
@@ -209,7 +207,7 @@ namespace TireServiceAPI.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
@@ -218,80 +216,85 @@ namespace TireServiceAPI.Migrations
 
             modelBuilder.Entity("TireServiceAPI.Models.Product.Types.Tire.Tire", b =>
                 {
-                    b.HasOne("TireServiceAPI.Models.Product.Brand", null)
+                    b.HasOne("TireServiceAPI.Models.Product.Brand", "Brands")
                         .WithMany("Tires")
-                        .HasForeignKey("BrandId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Brand")
+                        .HasPrincipalKey("Name");
 
-                    b.HasOne("TireServiceAPI.Models.Product.Diameter", null)
+                    b.HasOne("TireServiceAPI.Models.Product.Diameter", "Diameters")
                         .WithMany("Tires")
-                        .HasForeignKey("DiameterId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Diameter")
+                        .HasPrincipalKey("Name");
 
-                    b.HasOne("TireServiceAPI.Models.Product.Types.Tire.TireProfile", null)
+                    b.HasOne("TireServiceAPI.Models.Product.Types.Tire.TireProfile", "TireProfiles")
                         .WithMany("Tires")
-                        .HasForeignKey("TireProfileId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TireProfile")
+                        .HasPrincipalKey("Name");
 
-                    b.HasOne("TireServiceAPI.Models.Product.Types.Tire.TireSeason", null)
+                    b.HasOne("TireServiceAPI.Models.Product.Types.Tire.TireSeason", "TireSeasons")
                         .WithMany("Tires")
-                        .HasForeignKey("TireSeasonId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TireSeason")
+                        .HasPrincipalKey("Name");
 
-                    b.HasOne("TireServiceAPI.Models.Product.Width", null)
+                    b.HasOne("TireServiceAPI.Models.Product.Width", "Widths")
                         .WithMany("Tires")
-                        .HasForeignKey("WidthId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Width")
+                        .HasPrincipalKey("Name");
+
+                    b.Navigation("Brands");
+
+                    b.Navigation("Diameters");
+
+                    b.Navigation("TireProfiles");
+
+                    b.Navigation("TireSeasons");
+
+                    b.Navigation("Widths");
                 });
 
             modelBuilder.Entity("TireServiceAPI.Models.Product.Types.Wheel.Wheel", b =>
                 {
-                    b.HasOne("TireServiceAPI.Models.Product.Brand", "Brand")
-                        .WithMany()
-                        .HasForeignKey("BrandId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TireServiceAPI.Models.Product.Diameter", "Diameter")
-                        .WithMany()
-                        .HasForeignKey("DiameterId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TireServiceAPI.Models.Product.Types.Wheel.WheelType", "WheelType")
+                    b.HasOne("TireServiceAPI.Models.Product.Brand", "Brands")
                         .WithMany("Wheels")
-                        .HasForeignKey("WheelTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Brand")
+                        .HasPrincipalKey("Name");
 
-                    b.HasOne("TireServiceAPI.Models.Product.Width", "Width")
-                        .WithMany()
-                        .HasForeignKey("WidthId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("TireServiceAPI.Models.Product.Diameter", "Diameters")
+                        .WithMany("Wheels")
+                        .HasForeignKey("Diameter")
+                        .HasPrincipalKey("Name");
 
-                    b.Navigation("Brand");
+                    b.HasOne("TireServiceAPI.Models.Product.Types.Wheel.WheelType", "WheelTypes")
+                        .WithMany("Wheels")
+                        .HasForeignKey("WheelType")
+                        .HasPrincipalKey("Name");
 
-                    b.Navigation("Diameter");
+                    b.HasOne("TireServiceAPI.Models.Product.Width", "Widths")
+                        .WithMany("Wheels")
+                        .HasForeignKey("Width")
+                        .HasPrincipalKey("Name");
 
-                    b.Navigation("WheelType");
+                    b.Navigation("Brands");
 
-                    b.Navigation("Width");
+                    b.Navigation("Diameters");
+
+                    b.Navigation("WheelTypes");
+
+                    b.Navigation("Widths");
                 });
 
             modelBuilder.Entity("TireServiceAPI.Models.Product.Brand", b =>
                 {
                     b.Navigation("Tires");
+
+                    b.Navigation("Wheels");
                 });
 
             modelBuilder.Entity("TireServiceAPI.Models.Product.Diameter", b =>
                 {
                     b.Navigation("Tires");
+
+                    b.Navigation("Wheels");
                 });
 
             modelBuilder.Entity("TireServiceAPI.Models.Product.Types.Tire.TireProfile", b =>
@@ -312,6 +315,8 @@ namespace TireServiceAPI.Migrations
             modelBuilder.Entity("TireServiceAPI.Models.Product.Width", b =>
                 {
                     b.Navigation("Tires");
+
+                    b.Navigation("Wheels");
                 });
 #pragma warning restore 612, 618
         }

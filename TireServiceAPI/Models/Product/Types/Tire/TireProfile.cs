@@ -1,12 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace TireServiceAPI.Models.Product.Types.Tire
+﻿namespace TireServiceAPI.Models.Product.Types.Tire
 {
 	public class TireProfile
 	{
 		public int Id { get; set; }
-		public string Name { get; set; } = string.Empty;
-		public ICollection<Tire> Tires { get; set; }
+		public string? Name { get; set; }
+		public List<Tire> Tires { get; set; } = new();
 	}
 }

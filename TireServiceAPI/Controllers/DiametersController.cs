@@ -24,13 +24,13 @@ namespace TireServiceAPI.Controllers
 			{
 				return NotFound();
 			}
-			return await _context.Diameters.Include(b => b.Tires).ToListAsync();
+			return await _context.Diameters.Include(b => b.Tires).Include(b => b.Wheels).ToListAsync();
 		}
 
 		[HttpGet("{id}/tires")]
 		public async Task<ActionResult<IEnumerable<Tire>>> GetTires(int id)
 		{
-			var Diameter = await _context.Diameters.Include(b => b.Tires).FirstOrDefaultAsync(b => b.Id == id);
+			var Diameter = await _context.Diameters.Include(b => b.Tires).Include(b => b.Wheels).FirstOrDefaultAsync(b => b.Id == id);
 
 			if (Diameter == null)
 			{

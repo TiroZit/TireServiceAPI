@@ -5,7 +5,7 @@
 namespace TireServiceAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class Product : Migration
+    public partial class product : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,11 +16,12 @@ namespace TireServiceAPI.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Brands", x => x.Id);
+                    table.UniqueConstraint("AK_Brands_Name", x => x.Name);
                 });
 
             migrationBuilder.CreateTable(
@@ -29,11 +30,12 @@ namespace TireServiceAPI.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Diameters", x => x.Id);
+                    table.UniqueConstraint("AK_Diameters_Name", x => x.Name);
                 });
 
             migrationBuilder.CreateTable(
@@ -42,11 +44,12 @@ namespace TireServiceAPI.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TireProfiles", x => x.Id);
+                    table.UniqueConstraint("AK_TireProfiles_Name", x => x.Name);
                 });
 
             migrationBuilder.CreateTable(
@@ -55,11 +58,12 @@ namespace TireServiceAPI.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TireSeasons", x => x.Id);
+                    table.UniqueConstraint("AK_TireSeasons_Name", x => x.Name);
                 });
 
             migrationBuilder.CreateTable(
@@ -81,11 +85,12 @@ namespace TireServiceAPI.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Widths", x => x.Id);
+                    table.UniqueConstraint("AK_Widths_Name", x => x.Name);
                 });
 
             migrationBuilder.CreateTable(
@@ -94,52 +99,47 @@ namespace TireServiceAPI.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Price = table.Column<int>(type: "int", nullable: false),
-                    Image = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BrandId = table.Column<int>(type: "int", nullable: false),
-                    WidthId = table.Column<int>(type: "int", nullable: false),
-                    DiameterId = table.Column<int>(type: "int", nullable: false),
-                    TireSeasonId = table.Column<int>(type: "int", nullable: false),
-                    TireProfileId = table.Column<int>(type: "int", nullable: false)
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Brand = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Width = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Diameter = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    TireSeason = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    TireProfile = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Tires", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Tires_Brands_BrandId",
-                        column: x => x.BrandId,
+                        name: "FK_Tires_Brands_Brand",
+                        column: x => x.Brand,
                         principalTable: "Brands",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Name");
                     table.ForeignKey(
-                        name: "FK_Tires_Diameters_DiameterId",
-                        column: x => x.DiameterId,
+                        name: "FK_Tires_Diameters_Diameter",
+                        column: x => x.Diameter,
                         principalTable: "Diameters",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Name");
                     table.ForeignKey(
-                        name: "FK_Tires_TireProfiles_TireProfileId",
-                        column: x => x.TireProfileId,
+                        name: "FK_Tires_TireProfiles_TireProfile",
+                        column: x => x.TireProfile,
                         principalTable: "TireProfiles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Name");
                     table.ForeignKey(
-                        name: "FK_Tires_TireSeasons_TireSeasonId",
-                        column: x => x.TireSeasonId,
+                        name: "FK_Tires_TireSeasons_TireSeason",
+                        column: x => x.TireSeason,
                         principalTable: "TireSeasons",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Name");
                     table.ForeignKey(
-                        name: "FK_Tires_Widths_WidthId",
-                        column: x => x.WidthId,
+                        name: "FK_Tires_Widths_Width",
+                        column: x => x.Width,
                         principalTable: "Widths",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Name");
                 });
 
             migrationBuilder.CreateTable(
-                name: "Wheel",
+                name: "Wheels",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -154,27 +154,27 @@ namespace TireServiceAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Wheel", x => x.Id);
+                    table.PrimaryKey("PK_Wheels", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Wheel_Brands_BrandId",
+                        name: "FK_Wheels_Brands_BrandId",
                         column: x => x.BrandId,
                         principalTable: "Brands",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Wheel_Diameters_DiameterId",
+                        name: "FK_Wheels_Diameters_DiameterId",
                         column: x => x.DiameterId,
                         principalTable: "Diameters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Wheel_WheelTypes_WheelTypeId",
+                        name: "FK_Wheels_WheelTypes_WheelTypeId",
                         column: x => x.WheelTypeId,
                         principalTable: "WheelTypes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Wheel_Widths_WidthId",
+                        name: "FK_Wheels_Widths_WidthId",
                         column: x => x.WidthId,
                         principalTable: "Widths",
                         principalColumn: "Id",
@@ -182,48 +182,48 @@ namespace TireServiceAPI.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tires_BrandId",
+                name: "IX_Tires_Brand",
                 table: "Tires",
+                column: "Brand");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tires_Diameter",
+                table: "Tires",
+                column: "Diameter");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tires_TireProfile",
+                table: "Tires",
+                column: "TireProfile");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tires_TireSeason",
+                table: "Tires",
+                column: "TireSeason");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tires_Width",
+                table: "Tires",
+                column: "Width");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Wheels_BrandId",
+                table: "Wheels",
                 column: "BrandId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tires_DiameterId",
-                table: "Tires",
+                name: "IX_Wheels_DiameterId",
+                table: "Wheels",
                 column: "DiameterId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tires_TireProfileId",
-                table: "Tires",
-                column: "TireProfileId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Tires_TireSeasonId",
-                table: "Tires",
-                column: "TireSeasonId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Tires_WidthId",
-                table: "Tires",
-                column: "WidthId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Wheel_BrandId",
-                table: "Wheel",
-                column: "BrandId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Wheel_DiameterId",
-                table: "Wheel",
-                column: "DiameterId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Wheel_WheelTypeId",
-                table: "Wheel",
+                name: "IX_Wheels_WheelTypeId",
+                table: "Wheels",
                 column: "WheelTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Wheel_WidthId",
-                table: "Wheel",
+                name: "IX_Wheels_WidthId",
+                table: "Wheels",
                 column: "WidthId");
         }
 
@@ -234,7 +234,7 @@ namespace TireServiceAPI.Migrations
                 name: "Tires");
 
             migrationBuilder.DropTable(
-                name: "Wheel");
+                name: "Wheels");
 
             migrationBuilder.DropTable(
                 name: "TireProfiles");
