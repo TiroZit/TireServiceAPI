@@ -2,6 +2,7 @@
 using TireServiceAPI.Models.Product.Types.Tire;
 using TireServiceAPI.Models.Product;
 using Microsoft.Extensions.Options;
+using TireServiceAPI.Models.Product.Types.Wheel;
 
 public class DataContext : DbContext
 {
@@ -9,15 +10,11 @@ public class DataContext : DbContext
 	{
 	}
 	public DbSet<Brand> Brands { get; set; }
+	public DbSet<Width> Widths { get; set; }
+	public DbSet<Diameter> Diameters { get; set; }
+	public DbSet<TireSeason> TireSeasons { get; set; }
+	public DbSet<TireProfile> TireProfiles { get; set; }
+	public DbSet<WheelType> WheelTypes { get; set; }
 	public DbSet<Tire> Tires { get; set; }
-	protected override void OnModelCreating(ModelBuilder modelBuilder)
-	{
-		var tires = modelBuilder.Entity<Tire>();
-
-		tires
-			.HasOne(b => b.TireBrand)
-			.WithMany(a => a.Tires)
-			.HasForeignKey("Id_TireBrand")
-			.IsRequired();
-	}
+	//public DbSet<Wheel> Wheels { get; set; }
 }

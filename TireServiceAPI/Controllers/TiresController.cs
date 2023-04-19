@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using TireServiceAPI.Models.Product.Types.Tire;
 
@@ -28,14 +29,14 @@ namespace TireServiceAPI.Controllers
           {
               return NotFound();
           }
-            return await _context.Tires.Include(t => t.TireBrand).ToListAsync();
+            return await _context.Tires.ToListAsync();
         }
 
 		// GET: api/Tires/5
 		[HttpGet("{id}")]
 		public async Task<ActionResult<Tire>> GetTire(int id)
 		{
-			var tire = await _context.Tires.Include(t => t.TireBrand).FirstOrDefaultAsync(t => t.Id == id);
+			var tire = await _context.Tires.FirstOrDefaultAsync(t => t.Id == id);
 
 			if (tire == null)
 			{
