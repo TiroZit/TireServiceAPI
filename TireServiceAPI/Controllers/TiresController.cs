@@ -1,80 +1,111 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using TireServiceAPI.Data;
-using TireServiceAPI.Models;
+using TireServiceAPI.Models.Product.Types.Tire;
 
 namespace TireServiceAPI.Controllers
 {
-  [Route("api/[controller]")]
-  [ApiController]
-  public class TiresController : ControllerBase
-  {
-    private readonly DataContext _context;
-
-    public TiresController(DataContext context)
+    [Route("api/[controller]")]
+    [ApiController]
+    public class TiresController : ControllerBase
     {
-      _context = context;
-    }
+        private readonly DataContext _context;
 
-    [HttpGet]
-    public async Task<ActionResult<List<Tire>>> Get()
-    {
-      return Ok(await _context.Tires.ToListAsync());
-    }
+        public TiresController(DataContext context)
+        {
+            _context = context;
+        }
 
-    [HttpGet("{id}")]
-    public async Task<ActionResult<Tire>> Get(int id)
-    {
-      var Tire = await _context.Tires.FindAsync(id);
-      if (Tire == null)
-        return BadRequest("Tire not found.");
-      return Ok(Tire);
-    }
+        // GET: api/Tires
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Tire>>> GetTires()
+        {
+          if (_context.Tires == null)
+          {
+              return NotFound();
+          }
+            return await _context.Tires.Include(t => t.TireBrand).ToListAsync();
+        }
 
-    [HttpPost]
-    public async Task<ActionResult<List<Tire>>> AddTire(Tire Tire)
-    {
-      _context.Tires.Add(Tire);
-      await _context.SaveChangesAsync();
+		// GET: api/Tires/5
+		[HttpGet("{id}")]
+		public async Task<ActionResult<Tire>> GetTire(int id)
+		{
+			var tire = await _context.Tires.Include(t => t.TireBrand).FirstOrDefaultAsync(t => t.Id == id);
 
-      return Ok(await _context.Tires.ToListAsync());
-    }
+			if (tire == null)
+			{
+				return NotFound();
+			}
 
-    [HttpPut]
-    public async Task<ActionResult<List<Tire>>> UpdateTire(Tire request)
-    {
-      var dbTire = await _context.Tires.FindAsync(request.Id);
-      if (dbTire == null)
-        return BadRequest("Tire not found.");
+			return tire;
+		}
 
-      dbTire.Name = request.Name;
-      dbTire.Image = request.Image;
-      dbTire.Season = request.Season;
-      dbTire.Price = request.Price;
-      dbTire.Quantity = request.Quantity;
-      dbTire.QuantityCart = request.QuantityCart;
-      dbTire.isCart = request.isCart;
-      dbTire.isFavorite = request.isFavorite;
-      dbTire.isCompare = request.isCompare;
+		// PUT: api/Tires/5
+		// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+		[HttpPut("{id}")]
+		public async Task<IActionResult> PutTire(int id, Tire tire)
+		{
+			if (id != tire.Id)
+			{
+				return BadRequest();
+			}
 
-      await _context.SaveChangesAsync();
+			_context.Entry(tire).State = EntityState.Modified;
 
-      return Ok(await _context.Tires.ToListAsync());
-    }
+			try
+			{
+				await _context.SaveChangesAsync();
+			}
+			catch (DbUpdateConcurrencyException)
+			{
+				if (!TireExists(id))
+				{
+					return NotFound();
+				}
+				else
+				{
+					throw;
+				}
+			}
 
-    [HttpDelete("{id}")]
-    public async Task<ActionResult<List<Tire>>> Delete(int id)
-    {
-      var dbTire = await _context.Tires.FindAsync(id);
-      if (dbTire == null)
-        return BadRequest("Tire not found.");
+			return NoContent();
+		}
 
-      _context.Tires.Remove(dbTire);
-      await _context.SaveChangesAsync();
+		// POST: api/Tires
+		// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+		[HttpPost]
+		public async Task<ActionResult<Tire>> PostTire(Tire tire)
+		{
+			_context.Tires.Add(tire);
+			await _context.SaveChangesAsync();
 
-      return Ok(await _context.Tires.ToListAsync());
-    }
+			return CreatedAtAction(nameof(GetTire), new { id = tire.Id }, tire);
+		}
 
-  }
+		// DELETE: api/Tires/5
+		[HttpDelete("{id}")]
+		public async Task<IActionResult> DeleteTire(int id)
+		{
+			var tire = await _context.Tires.FindAsync(id);
+			if (tire == null)
+			{
+				return NotFound();
+			}
+
+			_context.Tires.Remove(tire);
+			await _context.SaveChangesAsync();
+
+			return NoContent();
+		}
+
+		private bool TireExists(int id)
+		{
+			return _context.Tires.Any(t => t.Id == id);
+		}
+	}
 }

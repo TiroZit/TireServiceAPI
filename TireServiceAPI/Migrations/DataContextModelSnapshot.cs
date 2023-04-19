@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using TireServiceAPI.Data;
 
 #nullable disable
 
@@ -21,7 +20,7 @@ namespace TireServiceAPI.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("TireServiceAPI.Models.Tire", b =>
+            modelBuilder.Entity("TireServiceAPI.Models.Product.Brand", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -29,39 +28,51 @@ namespace TireServiceAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Image")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Brands");
+                });
+
+            modelBuilder.Entity("TireServiceAPI.Models.Product.Types.Tire.Tire", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Id_TireBrand")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Price")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<int>("QuantityCart")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Season")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("isCart")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("isCompare")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("isFavorite")
-                        .HasColumnType("bit");
-
                     b.HasKey("Id");
 
+                    b.HasIndex("Id_TireBrand");
+
                     b.ToTable("Tires");
+                });
+
+            modelBuilder.Entity("TireServiceAPI.Models.Product.Types.Tire.Tire", b =>
+                {
+                    b.HasOne("TireServiceAPI.Models.Product.Brand", "TireBrand")
+                        .WithMany("Tires")
+                        .HasForeignKey("Id_TireBrand")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TireBrand");
+                });
+
+            modelBuilder.Entity("TireServiceAPI.Models.Product.Brand", b =>
+                {
+                    b.Navigation("Tires");
                 });
 #pragma warning restore 612, 618
         }

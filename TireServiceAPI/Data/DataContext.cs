@@ -1,13 +1,23 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using TireServiceAPI.Models;
+using TireServiceAPI.Models.Product.Types.Tire;
+using TireServiceAPI.Models.Product;
+using Microsoft.Extensions.Options;
 
-namespace TireServiceAPI.Data
+public class DataContext : DbContext
 {
-    public class DataContext : DbContext
-  {
-    public DataContext(DbContextOptions<DataContext> options) : base(options) { }
+	public DataContext(DbContextOptions<DataContext> options) : base(options)
+	{
+	}
+	public DbSet<Brand> Brands { get; set; }
+	public DbSet<Tire> Tires { get; set; }
+	protected override void OnModelCreating(ModelBuilder modelBuilder)
+	{
+		var tires = modelBuilder.Entity<Tire>();
 
-    public DbSet<Tire> Tires { get; set; }
-  }
+		tires
+			.HasOne(b => b.TireBrand)
+			.WithMany(a => a.Tires)
+			.HasForeignKey("Id_TireBrand")
+			.IsRequired();
+	}
 }
