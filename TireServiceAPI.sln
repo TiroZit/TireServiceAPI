@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.5.33516.290
+VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TireServiceAPI", "TireServiceAPI\TireServiceAPI.csproj", "{D75301F4-89E0-446C-987E-80C230CCC47C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TireServiceAPI", "TireServiceAPI\TireServiceAPI.csproj", "{30625E2B-94E4-47EE-9B65-F887F698D766}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D75301F4-89E0-446C-987E-80C230CCC47C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D75301F4-89E0-446C-987E-80C230CCC47C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D75301F4-89E0-446C-987E-80C230CCC47C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D75301F4-89E0-446C-987E-80C230CCC47C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30625E2B-94E4-47EE-9B65-F887F698D766}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30625E2B-94E4-47EE-9B65-F887F698D766}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30625E2B-94E4-47EE-9B65-F887F698D766}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30625E2B-94E4-47EE-9B65-F887F698D766}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {BFD21756-E297-416B-8D36-54ADAD704B5C}
+		SolutionGuid = {D1C6A3E0-97F8-4E16-88DA-28892DA3807E}
 	EndGlobalSection
 EndGlobal
