@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Visual Studio 2010\\tirozit\\TireServiceAPI\\TireServiceAPI\\TireServiceAPI.csproj": {}
+    "C:\\Users\\nikus\\source\\repos\\TireServiceAPI\\TireServiceAPI\\TireServiceAPI.csproj": {}
   },
   "projects": {
-    "D:\\Visual Studio 2010\\tirozit\\TireServiceAPI\\TireServiceAPI\\TireServiceAPI.csproj": {
+    "C:\\Users\\nikus\\source\\repos\\TireServiceAPI\\TireServiceAPI\\TireServiceAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Visual Studio 2010\\tirozit\\TireServiceAPI\\TireServiceAPI\\TireServiceAPI.csproj",
+        "projectUniqueName": "C:\\Users\\nikus\\source\\repos\\TireServiceAPI\\TireServiceAPI\\TireServiceAPI.csproj",
         "projectName": "TireServiceAPI",
-        "projectPath": "D:\\Visual Studio 2010\\tirozit\\TireServiceAPI\\TireServiceAPI\\TireServiceAPI.csproj",
-        "packagesPath": "C:\\Users\\группа\\.nuget\\packages\\",
-        "outputPath": "D:\\Visual Studio 2010\\tirozit\\TireServiceAPI\\TireServiceAPI\\obj\\",
+        "projectPath": "C:\\Users\\nikus\\source\\repos\\TireServiceAPI\\TireServiceAPI\\TireServiceAPI.csproj",
+        "packagesPath": "C:\\Users\\nikus\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\nikus\\source\\repos\\TireServiceAPI\\TireServiceAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\группа\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\nikus\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -71,7 +71,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -83,7 +84,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     }
