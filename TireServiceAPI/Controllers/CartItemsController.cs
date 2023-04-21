@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Azure.Core;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TireServiceAPI.Models.Cart;
@@ -18,13 +19,13 @@ namespace TireServiceAPI.Controllers
 
 		// GET: api/CartItems
 		[HttpGet]
-		public async Task<ActionResult<IEnumerable<CartItem>>> GetCartItems()
+		public async Task<ActionResult<List<CartItem>>> Get()
 		{
 			if (_context.CartItems == null)
 			{
 				return NotFound();
 			}
-			return await _context.CartItems.ToListAsync();
+			return await _context.CartItems.Include(c => c.Tire).ToListAsync();
 		}
 
 		// GET: api/CartItems/5
@@ -82,6 +83,22 @@ namespace TireServiceAPI.Controllers
 
 			return CreatedAtAction(nameof(GetCartItem), new { id = cartitem.Id }, cartitem);
 		}
+		//[HttpPost]
+		//public async Task<ActionResult<List<CartItem>>> Create(CreateCartItem request)
+		//{
+		//	var tire = await _context.Tires.FindAsync(request.Id);
+
+		//	var newCartItem = new CartItem
+		//	{
+		//		CartId = request.CartId,
+
+		//	};
+
+		//	_context.CartItems.Add(newCartItem);
+		//	await _context.SaveChangesAsync();
+
+		//	return CreatedAtAction(nameof(GetCartItem), new { id = cartitem.Id }, cartitem);
+		//}
 
 		// DELETE: api/CartItems/5
 		[HttpDelete("{id}")]

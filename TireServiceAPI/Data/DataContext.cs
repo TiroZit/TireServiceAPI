@@ -289,6 +289,10 @@ public class DataContext : DbContext
 			}
 		);
 
+		modelBuilder.Entity<Cart>().HasData(
+			new Cart { Id = 1, UserId = 1 }
+		);
+
 		modelBuilder.Entity<Tire>()
 			.HasOne(t => t.Brands)
 			.WithMany(b => b.Tires)
@@ -354,11 +358,5 @@ public class DataContext : DbContext
 			.WithMany(b => b.Wheels)
 			.HasForeignKey(t => t.WheelCategory)
 			.HasPrincipalKey(b => b.Name);
-
-		// Cart
-		modelBuilder.Entity<CartItem>()
-			.HasOne(t => t.Carts)
-			.WithMany(b => b.CartItems)
-			.HasForeignKey(t => t.CartId);
 	}
 }

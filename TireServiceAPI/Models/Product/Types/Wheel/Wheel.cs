@@ -1,4 +1,4 @@
-﻿using TireServiceAPI.Models.Product.Types.Tire;
+﻿using TireServiceAPI.Models.Cart;
 
 namespace TireServiceAPI.Models.Product.Types.Wheel
 {

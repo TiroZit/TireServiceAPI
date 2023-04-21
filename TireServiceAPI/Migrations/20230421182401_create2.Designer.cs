@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace TireServiceAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230421182401_create2")]
+    partial class create2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -71,7 +74,8 @@ namespace TireServiceAPI.Migrations
 
                     b.HasIndex("CartId");
 
-                    b.HasIndex("TireId");
+                    b.HasIndex("TireId")
+                        .IsUnique();
 
                     b.HasIndex("wheelId");
 
@@ -722,8 +726,8 @@ namespace TireServiceAPI.Migrations
                         .IsRequired();
 
                     b.HasOne("TireServiceAPI.Models.Product.Types.Tire.Tire", "Tire")
-                        .WithMany("cartItems")
-                        .HasForeignKey("TireId")
+                        .WithOne("CartItem")
+                        .HasForeignKey("TireServiceAPI.Models.Cart.CartItem", "TireId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -842,7 +846,7 @@ namespace TireServiceAPI.Migrations
 
             modelBuilder.Entity("TireServiceAPI.Models.Product.Types.Tire.Tire", b =>
                 {
-                    b.Navigation("cartItems");
+                    b.Navigation("CartItem");
                 });
 
             modelBuilder.Entity("TireServiceAPI.Models.Product.Types.Tire.TireCategory", b =>

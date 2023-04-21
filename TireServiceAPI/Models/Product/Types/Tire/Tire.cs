@@ -1,4 +1,7 @@
-﻿namespace TireServiceAPI.Models.Product.Types.Tire
+﻿using System.Text.Json.Serialization;
+using TireServiceAPI.Models.Cart;
+
+namespace TireServiceAPI.Models.Product.Types.Tire
 {
 	public class Tire
 	{
@@ -26,5 +29,7 @@
 
 		public string? TireCategory { get; set; }
 		public TireCategory? TireCategories { get; set; }
+		[JsonIgnore]
+		public List<CartItem> cartItems { get; set; } = new List<CartItem>();
 	}
 }

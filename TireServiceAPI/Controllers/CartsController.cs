@@ -23,13 +23,15 @@ namespace TireServiceAPI.Controllers
 			{
 				return NotFound();
 			}
-			return await _context.Carts.Include(b => b.CartItems).ToListAsync();
+			return await _context.Carts.Include(c => c.CartItems).ThenInclude(c => c.Tire).ToListAsync();
 		}
 
 		[HttpGet("{id}/carts")]
 		public async Task<ActionResult<IEnumerable<Cart>>> GetCartItems(int id)
 		{
-			var cart = await _context.Carts.Include(b => b.CartItems).FirstOrDefaultAsync(b => b.Id == id);
+			var cartitems = await _context.CartItems.Include(c => c.Tire).ToListAsync();
+
+			var cart = await _context.Carts.Include(c => c.CartItems).ThenInclude(c => c.Tire).FirstOrDefaultAsync(b => b.Id == id);
 
 			if (cart == null)
 			{

@@ -138,28 +138,6 @@ namespace TireServiceAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CartItems",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CartId = table.Column<int>(type: "int", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
-                    CategoryName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CartItems", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_CartItems_Carts_CartId",
-                        column: x => x.CartId,
-                        principalTable: "Carts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Tires",
                 columns: table => new
                 {
@@ -255,6 +233,40 @@ namespace TireServiceAPI.Migrations
                         principalColumn: "Name");
                 });
 
+            migrationBuilder.CreateTable(
+                name: "CartItems",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CartId = table.Column<int>(type: "int", nullable: false),
+                    CategoryName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    TireId = table.Column<int>(type: "int", nullable: false),
+                    wheelId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CartItems", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CartItems_Carts_CartId",
+                        column: x => x.CartId,
+                        principalTable: "Carts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CartItems_Tires_TireId",
+                        column: x => x.TireId,
+                        principalTable: "Tires",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CartItems_Wheels_wheelId",
+                        column: x => x.wheelId,
+                        principalTable: "Wheels",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.InsertData(
                 table: "Brands",
                 columns: new[] { "Id", "Name" },
@@ -264,6 +276,11 @@ namespace TireServiceAPI.Migrations
                     { 2, "ROYALBLACK" },
                     { 3, "FORMULA" }
                 });
+
+            migrationBuilder.InsertData(
+                table: "Carts",
+                columns: new[] { "Id", "UserId" },
+                values: new object[] { 1, 1 });
 
             migrationBuilder.InsertData(
                 table: "Diameters",
@@ -384,6 +401,17 @@ namespace TireServiceAPI.Migrations
                 column: "CartId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CartItems_TireId",
+                table: "CartItems",
+                column: "TireId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CartItems_wheelId",
+                table: "CartItems",
+                column: "wheelId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Tires_Brand",
                 table: "Tires",
                 column: "Brand");
@@ -446,13 +474,13 @@ namespace TireServiceAPI.Migrations
                 name: "CartItems");
 
             migrationBuilder.DropTable(
+                name: "Carts");
+
+            migrationBuilder.DropTable(
                 name: "Tires");
 
             migrationBuilder.DropTable(
                 name: "Wheels");
-
-            migrationBuilder.DropTable(
-                name: "Carts");
 
             migrationBuilder.DropTable(
                 name: "TireCategories");
