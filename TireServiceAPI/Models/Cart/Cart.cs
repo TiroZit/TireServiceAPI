@@ -7,6 +7,6 @@ namespace TireServiceAPI.Models.Cart
     {
         public int Id { get; set; }
 		public int UserId { get; set; }
-		public ICollection<CartItem> CartItems { get; set; }
+		public List<CartItem> CartItems { get; set; } = new List<CartItem>();
 	}
 }
