@@ -76,12 +76,25 @@ namespace TireServiceAPI.Controllers
 		// POST: api/CartItems
 		// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
 		[HttpPost]
-		public async Task<ActionResult<CartItem>> PostTire(CartItem cartitem)
+		public async Task<ActionResult<CartItem>> PostTire(CartItem cartItem)
 		{
-			_context.CartItems.Add(cartitem);
-			await _context.SaveChangesAsync();
-
-			return CreatedAtAction(nameof(GetCartItem), new { id = cartitem.Id }, cartitem);
+			// Проверяем, есть ли уже такой элемент в корзине
+			var existingItem = await _context.CartItems.FirstOrDefaultAsync(ci => ci.TireId == cartItem.TireId);
+			if (existingItem != null)
+			{
+				// Если элемент уже есть в корзине, увеличиваем его количество
+				existingItem.Quantity += cartItem.Quantity;
+				_context.Entry(existingItem).State = EntityState.Modified;
+				await _context.SaveChangesAsync();
+				return existingItem;
+			}
+			else
+			{
+				// Если элемента еще нет в корзине, добавляем его
+				_context.CartItems.Add(cartItem);
+				await _context.SaveChangesAsync();
+				return CreatedAtAction(nameof(GetCartItem), new { id = cartItem.Id }, cartItem);
+			}
 		}
 		//[HttpPost]
 		//public async Task<ActionResult<List<CartItem>>> Create(CreateCartItem request)
