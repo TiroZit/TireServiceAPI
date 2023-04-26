@@ -96,22 +96,6 @@ namespace TireServiceAPI.Controllers
 				return CreatedAtAction(nameof(GetCartItem), new { id = cartItem.Id }, cartItem);
 			}
 		}
-		//[HttpPost]
-		//public async Task<ActionResult<List<CartItem>>> Create(CreateCartItem request)
-		//{
-		//	var tire = await _context.Tires.FindAsync(request.Id);
-
-		//	var newCartItem = new CartItem
-		//	{
-		//		CartId = request.CartId,
-
-		//	};
-
-		//	_context.CartItems.Add(newCartItem);
-		//	await _context.SaveChangesAsync();
-
-		//	return CreatedAtAction(nameof(GetCartItem), new { id = cartitem.Id }, cartitem);
-		//}
 
 		// DELETE: api/CartItems/5
 		[HttpDelete("{id}")]

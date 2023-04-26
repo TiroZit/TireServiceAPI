@@ -3,6 +3,7 @@ using TireServiceAPI.Models.Product.Types.Tire;
 using TireServiceAPI.Models.Product;
 using TireServiceAPI.Models.Product.Types.Wheel;
 using TireServiceAPI.Models.Cart;
+using TireServiceAPI.Models.Favourite;
 
 public class DataContext : DbContext
 {
@@ -28,6 +29,10 @@ public class DataContext : DbContext
 	// Корзина
 	public DbSet<Cart> Carts { get; set; } = null!;
 	public DbSet<CartItem> CartItems { get; set; } = null!;
+
+	// Избранное
+	public DbSet<Favourite> Favourites { get; set; } = null!;
+	public DbSet<FavouriteItem> FavouriteItems { get; set; } = null!;
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{

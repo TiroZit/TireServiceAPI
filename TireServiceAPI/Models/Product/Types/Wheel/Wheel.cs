@@ -1,5 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 using TireServiceAPI.Models.Cart;
+using TireServiceAPI.Models.Favourite;
 
 namespace TireServiceAPI.Models.Product.Types.Wheel
 {
@@ -33,5 +34,7 @@ namespace TireServiceAPI.Models.Product.Types.Wheel
 		public WheelCategory? WheelCategories { get; set; }
 		[JsonIgnore]
 		public List<CartItem> cartItems { get; set; } = new List<CartItem>();
+		[JsonIgnore]
+		public List<FavouriteItem> FavouriteItems { get; set; } = new List<FavouriteItem>();
 	}
 }
