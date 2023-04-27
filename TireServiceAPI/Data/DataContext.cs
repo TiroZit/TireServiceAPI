@@ -298,6 +298,10 @@ public class DataContext : DbContext
 			new Cart { Id = 1, UserId = 1 }
 		);
 
+		modelBuilder.Entity<Favourite>().HasData(
+			new Favourite { Id = 1, UserId = 1 }
+		);
+
 		modelBuilder.Entity<Tire>()
 			.HasOne(t => t.Brands)
 			.WithMany(b => b.Tires)
