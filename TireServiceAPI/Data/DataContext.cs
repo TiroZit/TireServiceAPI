@@ -93,7 +93,7 @@ public class DataContext : DbContext
 			{ 
 				Id = 1,
 				Name = "Breeze (НК-132) TL",
-				Image = "https://roscarservis.ru/upload/iblock/526/qxay6p1xp2rt8p8xv1p6sjldm9o8hfl6.png",
+				Image = "tires/1.png",
 				Price = 2640,
 				Brand = "KAMA",
 				Width = "175",
@@ -106,7 +106,7 @@ public class DataContext : DbContext
 			{ 
 				Id = 2,
 				Name = "Breeze (НК-132) TL",
-				Image = "https://roscarservis.ru/upload/iblock/526/qxay6p1xp2rt8p8xv1p6sjldm9o8hfl6.png",
+				Image = "tires/2.png",
 				Price = 2660,
 				Brand = "KAMA",
 				Width = "175",
@@ -119,7 +119,7 @@ public class DataContext : DbContext
 			{ 
 				Id = 3,
 				Name = "Кама-365 (НК-241) TL",
-				Image = "https://roscarservis.ru/upload/iblock/657/0h3lz2vwxee6cmw92tg8hhewa3qq461t.png",
+				Image = "tires/3.png",
 				Price = 2700,
 				Brand = "KAMA",
 				Width = "175",
@@ -132,7 +132,7 @@ public class DataContext : DbContext
 			{ 
 				Id = 4,
 				Name = "Royalmile TL",
-				Image = "https://roscarservis.ru/upload/iblock/f80/mtsp0dkxvkpa8niycd4sg8wlu1i2wit0.png",
+				Image = "tires/4.png",
 				Price = 2710,
 				Brand = "ROYALBLACK",
 				Width = "175",
@@ -145,7 +145,7 @@ public class DataContext : DbContext
 			{ 
 				Id = 5,
 				Name = "Кама-365 (НК-241) TL",
-				Image = "https://roscarservis.ru/upload/resize_cache/iblock/ffc/275_275_1/pp53agkes1pl4dgg455tj5dlukvi56ww.png",
+				Image = "tires/5.png",
 				Price = 3011,
 				Brand = "KAMA",
 				Width = "195",
@@ -158,7 +158,7 @@ public class DataContext : DbContext
 			{ 
 				Id = 6,
 				Name = "Grant (НК-241) TL",
-				Image = "https://roscarservis.ru/upload/resize_cache/iblock/d7a/275_275_1/inozb3hnb7klkzkrb751ixkkd0skg6tz.png",
+				Image = "tires/6.png",
 				Price = 2988,
 				Brand = "KAMA",
 				Width = "205",
@@ -171,7 +171,7 @@ public class DataContext : DbContext
 			{ 
 				Id = 7,
 				Name = "ОШЗ ИЯ-112А",
-				Image = "https://roscarservis.ru/upload/resize_cache/iblock/951/275_275_1/9wfbjqhd9qdlrqz1pgvybvh3be59f6c9.png",
+				Image = "tires/specials/1.png",
 				Price = 10600,
 				Brand = "FORMULA",
 				Width = "135",
@@ -184,7 +184,7 @@ public class DataContext : DbContext
 			{ 
 				Id = 8,
 				Name = "ОШЗ У-2",
-				Image = "https://roscarservis.ru/upload/resize_cache/iblock/acd/275_275_1/nryvngrhcyft73ewlpj7cu58g40s669k.png",
+				Image = "tires/specials/2.png",
 				Price = 12033,
 				Brand = "FORMULA",
 				Width = "155",
@@ -197,7 +197,7 @@ public class DataContext : DbContext
 			{ 
 				Id = 9,
 				Name = "BKT FL-252",
-				Image = "https://roscarservis.ru/upload/resize_cache/iblock/8cc/275_275_1/3ist0g1kbxx4sjr0jzq4fzbo6eazqu8k.png",
+				Image = "tires/specials/3.png",
 				Price = 4481,
 				Brand = "ROYALBLACK",
 				Width = "195",
@@ -210,7 +210,7 @@ public class DataContext : DbContext
 			{ 
 				Id = 10,
 				Name = "solid /std/ Starco Tusker TL",
-				Image = "https://roscarservis.ru/upload/resize_cache/iblock/bb5/275_275_1/anxr0r0n9yrp54ozqv9qzzgznzx3wcp3.png",
+				Image = "tires/specials/4.png",
 				Price = 5442,
 				Brand = "FORMULA",
 				Width = "195",
@@ -236,7 +236,7 @@ public class DataContext : DbContext
 			{
 				Id = 1,
 				Name = "T.Corolla (53A38R) box Silver (TREBL)",
-				Image = "https://roscarservis.ru/upload/iblock/727/562hiidchq84f7yhexwrz5ihi91dyg77.png",
+				Image = "1",
 				Price = 2640,
 				Brand = "FORMULA",
 				Width = "175",
@@ -248,7 +248,7 @@ public class DataContext : DbContext
 			{
 				Id = 2,
 				Name = "ВАЗ-2112 Silver (ТЗСК, Тольятти)",
-				Image = "https://roscarservis.ru/upload/iblock/6e0/s0iljau91fl1hdek94e8wvwjzyky93qy.png",
+				Image = "wheels/1.png",
 				Price = 2660,
 				Brand = "KAMA",
 				Width = "195",
@@ -260,7 +260,7 @@ public class DataContext : DbContext
 			{
 				Id = 3,
 				Name = "Skoda, VW (63H37D-PCR14605100R) S (Eurodisk)",
-				Image = "https://roscarservis.ru/upload/iblock/f26/p4il5b3jxdcc3xulzhnwwq8ivppj4r4w.png",
+				Image = "wheels/2.png",
 				Price = 4040,
 				Brand = "ROYALBLACK",
 				Width = "205",
@@ -272,7 +272,7 @@ public class DataContext : DbContext
 			{
 				Id = 4,
 				Name = "Royalmile TL",
-				Image = "https://roscarservis.ru/upload/iblock/213/0j2f52wlx1xzrmlyz2j71i3uqdvtw71g.png",
+				Image = "wheels/3.png",
 				Price = 2710,
 				Brand = "ROYALBLACK",
 				Width = "175",
@@ -284,7 +284,7 @@ public class DataContext : DbContext
 			{
 				Id = 5,
 				Name = "(AR006) box Silver (TREBL)",
-				Image = "https://roscarservis.ru/upload/resize_cache/iblock/f4c/600_585_1/z9y1jdsf9n22ejxu245l1uqq61o4l3w7.png",
+				Image = "wheels/4.png",
 				Price = 46040,
 				Brand = "KAMA",
 				Width = "175",
